@@ -1,8 +1,7 @@
 from fastapi import FastAPI
 
-from test_routers import test_router
 from __version__ import APP_VERSION
-
+from test_routers import test_router
 
 app = FastAPI(version=APP_VERSION, title="Example App", description="Some description")
 
