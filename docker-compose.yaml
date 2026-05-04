@@ -1,17 +1,33 @@
 services:
+  example_api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: example-fastapi-app:dev
+    container_name: example_fastapi_api
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      APP_VERSION: "0.0.1"
+      APP_NAME: "Example FastAPI App"
+      APP_DESCRIPTION: "Example FastAPI application running in Docker"
+      URBAN_API_URL: "https://urban_api"
+
+    depends_on:
+      postgis:
+        condition: service_started
+
   postgis:
     image: postgis/postgis:16-3.4
     container_name: postgis_db
     restart: unless-stopped
-
     environment:
       POSTGRES_DB: gis_db
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-
     ports:
       - "5434:5432"
-
     volumes:
       - postgis_data:/var/lib/postgresql/data
 

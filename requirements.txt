@@ -2,3 +2,4 @@ fastapi~=0.136.1
 uvicorn~=0.46.0
 gunicorn~=25.3.0
 alembic~=1.18.4
+python-multipart!=0.0.27
