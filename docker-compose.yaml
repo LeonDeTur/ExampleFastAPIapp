@@ -12,7 +12,10 @@ services:
       APP_VERSION: "0.0.1"
       APP_NAME: "Example FastAPI App"
       APP_DESCRIPTION: "Example FastAPI application running in Docker"
-      URBAN_API_URL: "https://urban_api"
+      DATABASE_URL: "postgresql://postgres:postgres@postgis_db:5432/gis_db"
+
+    networks:
+      -  example_network
 
     depends_on:
       postgis:
@@ -30,6 +33,12 @@ services:
       - "5434:5432"
     volumes:
       - postgis_data:/var/lib/postgresql/data
+    networks:
+      - example_network
+
+networks:
+  example_network:
+    driver: bridge
 
 volumes:
   postgis_data:
